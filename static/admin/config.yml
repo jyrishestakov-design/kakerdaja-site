@@ -1,11 +1,14 @@
 # Kakerdaja sisuhaldus (Sveltia CMS) — sama ülesehitus nagu Sandra lehel.
-# Sisselogimine: GitHubi kontoga, millel on ligipääs repole
-# jyrishestakov-design/kakerdaja-site. Arvutis võib valida ka
-# "Work with Local Repository" ja valida saidi kausta.
+# Sisselogimine PAROOLIGA (GitHubi kontot pole vaja): nupp „Sign In with
+# GitHub“ avab akna, kus küsitakse Kakerdaja admini parooli
+# (netlify/functions/auth.mjs). Arvutis võib valida ka „Work with Local
+# Repository“ ja valida saidi kausta.
 backend:
   name: github
   repo: jyrishestakov-design/kakerdaja-site
   branch: main
+  base_url: https://kakerdaja.netlify.app
+  auth_endpoint: auth
 
 media_folder: "static/images/uudised"
 public_folder: "/images/uudised"

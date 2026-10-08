@@ -4,3 +4,7 @@
 
 [build.environment]
   HUGO_VERSION = "0.165.0"
+
+# Parooliga admini sisselogimine — vt netlify/functions/auth.mjs
+[functions]
+  directory = "netlify/functions"
