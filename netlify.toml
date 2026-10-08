@@ -8,3 +8,10 @@
 # Parooliga admini sisselogimine — vt netlify/functions/auth.mjs
 [functions]
   directory = "netlify/functions"
+
+# Vana Netlify aadress suunatakse põhidomeenile (admini sisselogimine töötab kakerdaja.eu all)
+[[redirects]]
+  from = "https://kakerdaja.netlify.app/*"
+  to = "https://kakerdaja.eu/:splat"
+  status = 301
+  force = true
