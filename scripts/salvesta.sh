@@ -33,6 +33,6 @@ git push origin main
 
 echo
 echo "==> Valmis. Netlify ehitab uue versiooni ~1 minutiga."
-echo "    Kontrolli: https://kakerdaja.netlify.app/"
+echo "    Kontrolli: https://kakerdaja.eu/"
 echo "    (See aken sulgub kohe iseenesest.)"
 sleep 3

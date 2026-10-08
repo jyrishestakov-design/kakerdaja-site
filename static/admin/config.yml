@@ -7,7 +7,7 @@ backend:
   name: github
   repo: jyrishestakov-design/kakerdaja-site
   branch: main
-  base_url: https://kakerdaja.netlify.app
+  base_url: https://kakerdaja.eu
   auth_endpoint: auth
 
 media_folder: "static/images/uudised"
@@ -24,7 +24,7 @@ media_libraries:
           quality: 82
           width: 2000
 
-site_url: https://kakerdaja.netlify.app
+site_url: https://kakerdaja.eu
 
 collections:
   # ------- UUDISED -------

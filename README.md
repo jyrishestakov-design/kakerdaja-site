@@ -4,7 +4,7 @@ Segarahvatantsurühma Kakerdaja veebileht — Hugo + Sveltia CMS (sama ülesehit
 
 ## Sisu muutmine
 
-- **Veebis:** ava `https://kakerdaja.netlify.app/admin/`, vajuta „Sign In with GitHub“ ja sisesta avanevas aknas **Kakerdaja admini parool**. GitHubi kontot pole vaja. Salvestus läheb otse GitHubi ja Netlify avaldab uue versiooni ~1 minutiga.
+- **Veebis:** ava `https://kakerdaja.eu/admin/`, vajuta „Sign In with GitHub“ ja sisesta avanevas aknas **Kakerdaja admini parool**. GitHubi kontot pole vaja. Salvestus läheb otse GitHubi ja Netlify avaldab uue versiooni ~1 minutiga.
 - **Arvutis:** topeltklõps `Ava admin.command` → vali sisselogimisel „Work with Local Repository“ ja see kaust. Kui valmis, topeltklõps `Salvesta muudatused.command`.
 
 Admini jaotised: **Uudised**, **Esinemised**, **Lehed** (Meist, Galerii, Tule tantsima, Kontakt), **Avaleht**, **Saidi seaded ja kontaktid**, **Menüü**, **Kujundus**.
