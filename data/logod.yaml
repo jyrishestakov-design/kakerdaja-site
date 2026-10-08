@@ -1,0 +1,17 @@
+# Logo allalaadimise leht (/lehed/logo/). Failid kaustas static/logo/.
+pohilogod:
+  - { nimi: "Logo, must", fail: Kakerdaja_logo_must, taust: "#FFFFFF", kirjeldus: "Põhiversioon heledale taustale" }
+  - { nimi: "Logo, valge", fail: Kakerdaja_logo_valge, taust: "#2B2E5C", kirjeldus: "Tumedale taustale" }
+  - { nimi: "Logo tumedale taustale", fail: Kakerdaja_logo_tumedale_taustale, taust: "#2B2E5C", kirjeldus: "Lind valge siluetiga, kiri valge" }
+  - { nimi: "Lind, must", fail: Kakerdaja_lind_must, taust: "#FFFFFF", kirjeldus: "Ainult lind" }
+  - { nimi: "Lind, valge", fail: Kakerdaja_lind_valge, taust: "#2B2E5C", kirjeldus: "Ainult lind, tumedale taustale" }
+  - { nimi: "Kiri, must", fail: Kakerdaja_tekst_must, taust: "#FFFFFF", kirjeldus: "Ainult „Kakerdaja“ kiri" }
+  - { nimi: "Kiri, valge", fail: Kakerdaja_tekst_valge, taust: "#2B2E5C", kirjeldus: "Kiri tumedale taustale" }
+varvid:
+  - { nimi: punane, hex: "#D7263D" }
+  - { nimi: oranž, slug: oranz, hex: "#F46036" }
+  - { nimi: kollane, hex: "#F6C324" }
+  - { nimi: roheline, hex: "#2E933C" }
+  - { nimi: sinine, hex: "#1B6FC2" }
+  - { nimi: indigo, hex: "#3A3D9C" }
+  - { nimi: violetne, hex: "#7B2D8E" }

@@ -1,0 +1,48 @@
+{{ define "main" }}
+{{- $L := hugo.Data.logod | default dict }}
+<article class="page wrap">
+  <header class="page-header"><h1>{{ .Title }}</h1></header>
+  <div class="prose">{{ .Content }}</div>
+  <p class="logo-zip"><a class="button" href="/logo/Kakerdaja_logod_vektor.zip" download>Laadi kõik vektorfailid alla (ZIP, 9 MB)</a></p>
+
+  <h2>Põhiversioonid</h2>
+  <div class="logo-grid">
+    {{- range $L.pohilogod }}
+    <figure class="logo-card">
+      <div class="logo-preview" style="background:{{ .taust | safeCSS }}"><img src="/logo/{{ .fail }}.png" alt="{{ .nimi }}" loading="lazy"></div>
+      <figcaption>
+        <strong>{{ .nimi }}</strong>{{ with .kirjeldus }}<span>{{ . }}</span>{{ end }}
+        <span class="dl">
+          <a href="/logo/{{ .fail }}.svg" download>SVG</a>
+          <a href="/logo/{{ .fail }}.pdf" download>PDF</a>
+          <a href="/logo/{{ .fail }}.png" download>PNG</a>
+        </span>
+      </figcaption>
+    </figure>
+    {{- end }}
+  </div>
+
+  <h2>Vikerkaarevärvides</h2>
+  <p class="muted">Läbipaistva taustaga logo ja lind igas värvis.</p>
+  <div class="logo-grid logo-grid-small">
+    {{- range $L.varvid }}
+    {{- $c := . }}
+    {{- $s := .slug | default .nimi }}
+    {{- range slice "logo" "lind" }}
+    {{- $f := printf "Kakerdaja_%s_%s" . $s }}
+    <figure class="logo-card">
+      <div class="logo-preview" style="background:#fff"><img src="/logo/varvilised/{{ $f }}.png" alt="Kakerdaja {{ . }} – {{ $c.nimi }}" loading="lazy"></div>
+      <figcaption>
+        <strong>{{ cond (eq . "logo") "Logo" "Lind" }} · {{ $c.nimi }}</strong><span>{{ $c.hex }}</span>
+        <span class="dl">
+          <a href="/logo/varvilised/{{ $f }}.svg" download>SVG</a>
+          <a href="/logo/varvilised/{{ $f }}.pdf" download>PDF</a>
+          <a href="/logo/varvilised/{{ $f }}.png" download>PNG</a>
+        </span>
+      </figcaption>
+    </figure>
+    {{- end }}
+    {{- end }}
+  </div>
+</article>
+{{ end }}

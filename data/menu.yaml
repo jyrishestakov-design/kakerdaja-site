@@ -6,3 +6,4 @@ items:
   - { name: "Galerii", url: "/lehed/galerii/", weight: 4 }
   - { name: "Tule tantsima", url: "/lehed/tule-tantsima/", weight: 5 }
   - { name: "Kontakt", url: "/lehed/kontakt/", weight: 6 }
+  - { name: "Logo", url: "/lehed/logo/", weight: 7 }

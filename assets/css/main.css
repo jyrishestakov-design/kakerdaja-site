@@ -161,3 +161,16 @@ figcaption{font-size:.85rem;color:var(--muted);margin-top:14px}
 .footer-bird{height:56px}
 .footer-links{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px!important}
 .plain-list{padding-left:1.1em}
+
+/* Logo allalaadimise leht */
+.logo-zip{margin:8px 0 40px}
+.logo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;margin-bottom:48px}
+.logo-grid-small{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.logo-card{margin:0;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:color-mix(in srgb,var(--paper) 70%,white)}
+.logo-preview{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:22px;border-bottom:1px solid var(--rule)}
+.logo-preview img{max-height:100%;max-width:100%;width:auto;object-fit:contain}
+.logo-card figcaption{margin:0;padding:12px 14px 14px;display:flex;flex-direction:column;gap:2px;font-size:.92rem;color:var(--ink)}
+.logo-card figcaption span{color:var(--muted);font-size:.85rem}
+.logo-card .dl{display:flex;gap:8px;margin-top:8px}
+.logo-card .dl a{font-size:.8rem;font-weight:700;text-decoration:none;border:1.5px solid var(--ink);color:var(--ink);border-radius:999px;padding:3px 11px}
+.logo-card .dl a:hover{background:var(--ink);color:var(--paper)}

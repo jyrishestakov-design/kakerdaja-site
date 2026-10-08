@@ -56,6 +56,7 @@
       <div>
         <p>{{ ($s.footer_text | default "Kakerdaja · {year}") | replaceRE `\{year\}` (string now.Year) }}</p>
         <p class="footer-links">
+          <a href="/lehed/logo/">Logo allalaadimiseks</a>
           {{- with $s.email }}<a href="mailto:{{ . }}">{{ . }}</a>{{ end }}
           {{- with $s.facebook }}<a href="{{ . }}" target="_blank" rel="noopener">Facebook</a>{{ end }}
           {{- with $s.instagram }}<a href="{{ . }}" target="_blank" rel="noopener">Instagram</a>{{ end }}
