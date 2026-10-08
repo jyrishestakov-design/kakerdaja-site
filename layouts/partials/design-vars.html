@@ -1,0 +1,28 @@
+{{- /* data/design.yaml -> CSS-muutujad (muudetav adminis "Kujundus"). */ -}}
+{{- with hugo.Data.design -}}
+<style>
+:root {
+{{- with .paber }} --paper: {{ . | safeCSS }};{{ end }}
+{{- with .tint }} --ink: {{ . | safeCSS }};{{ end }}
+{{- with .aktsent }} --accent: {{ . | safeCSS }};{{ end }}
+{{- with .aktsent2 }} --accent-2: {{ . | safeCSS }};{{ end }}
+{{- with .tume_taust }} --dark: {{ . | safeCSS }};{{ end }}
+{{- with .joon }} --rule: {{ . | safeCSS }};{{ end }}
+{{- with .font_pealkiri }} --font-head: {{ . | safeCSS }};{{ end }}
+{{- with .font_tekst }} --font-body: {{ . | safeCSS }};{{ end }}
+{{- with .baasfont }} --base: {{ . | safeCSS }};{{ end }}
+{{- with .reakorgus }} --lh: {{ . | safeCSS }};{{ end }}
+{{- with .sisu_laius }} --measure: {{ . | safeCSS }};{{ end }}
+{{- with .triibu_varvid }}
+  {{- $c := split (replace . " " "") "," }}
+  {{- $n := len $c }}
+  {{- $stops := slice }}
+  {{- range $i, $col := $c }}
+    {{- $a := div (mul $i 100.0) $n }}{{ $b := div (mul (add $i 1) 100.0) $n }}
+    {{- $stops = $stops | append (printf "%s %.3f%%, %s %.3f%%" $col $a $col $b) }}
+  {{- end }}
+ --stripe: linear-gradient(90deg, {{ delimit $stops ", " | safeCSS }});
+{{- end }}
+}
+</style>
+{{- end }}

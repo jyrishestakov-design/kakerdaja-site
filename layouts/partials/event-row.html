@@ -1,0 +1,12 @@
+{{- $d := time.AsTime .kuupaev -}}
+{{- $months := slice "jaanuar" "veebruar" "märts" "aprill" "mai" "juuni" "juuli" "august" "september" "oktoober" "november" "detsember" -}}
+<li class="event">
+  <time datetime="{{ $d.Format "2006-01-02" }}" class="event-date">
+    {{- with .kuupaev_tekstina }}{{ . }}{{ else }}{{ $d.Day }}. {{ index $months (sub (int $d.Month) 1) }} {{ $d.Year }}{{ end -}}
+  </time>
+  <span class="event-name">
+    {{- if .link }}<a href="{{ .link }}"{{ if hasPrefix .link "http" }} target="_blank" rel="noopener"{{ end }}>{{ .nimi }}</a>{{ else }}{{ .nimi }}{{ end -}}
+    {{- with .kellaaeg }}<span class="event-time"> · kell {{ . }}</span>{{ end -}}
+  </span>
+  {{- with .koht }}<span class="event-place">{{ . }}</span>{{ end }}
+</li>

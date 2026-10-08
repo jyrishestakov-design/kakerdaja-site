@@ -1,0 +1,13 @@
+{{ define "main" }}
+<article class="page wrap-narrow">
+  <header class="page-header">
+    <p class="eyebrow"><a href="/uudised/">Uudised</a> · <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "date-et.html" .Date }}</time></p>
+    <h1>{{ .Title }}</h1>
+  </header>
+  {{- with .Params.cover }}<figure class="cover"><img src="{{ . }}" alt=""></figure>{{ end }}
+  <div class="prose">{{ .Content }}</div>
+  {{ partial "gallery.html" . }}
+  {{- with .Params.allikas }}<p class="source muted">Algne postitus: <a href="{{ . }}" target="_blank" rel="noopener">Kakerdaja blogi</a></p>{{ end }}
+  <p><a class="more" href="/uudised/">← Kõik postitused</a></p>
+</article>
+{{ end }}

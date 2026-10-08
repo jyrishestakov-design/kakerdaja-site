@@ -1,0 +1,18 @@
+baseURL = "https://kakerdaja.netlify.app/"
+title = "Kakerdaja"
+locale = "et-EE"
+defaultContentLanguage = "et"
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  description = "Kakerdaja – Järvamaa segarahvatantsurühm aastast 1985"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      hardWraps = true
+      unsafe = true
+
+[outputs]
+  home = ["HTML"]
+  section = ["HTML"]

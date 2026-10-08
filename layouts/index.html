@@ -1,0 +1,60 @@
+{{ define "main" }}
+{{- $s := hugo.Data.settings | default dict }}
+{{- $h := hugo.Data.home | default dict }}
+{{- $today := now.Format "2006-01-02" }}
+{{- $events := (hugo.Data.esinemised | default dict).items | default slice }}
+{{- $upcoming := slice }}
+{{- range sort $events "kuupaev" "asc" }}{{ if ge ((time.AsTime .kuupaev).Format "2006-01-02") $today }}{{ $upcoming = $upcoming | append . }}{{ end }}{{ end }}
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-art" aria-hidden="true"><span class="hero-bird"></span></div>
+    <div class="hero-text">
+      <h1 class="hero-title"><span class="visually-hidden">{{ $s.site_title | default "Kakerdaja" }}</span><span class="hero-word" aria-hidden="true"></span></h1>
+      {{- with $s.tagline }}<p class="hero-tagline">{{ . }}</p>{{ end }}
+      <div class="next-up">
+        <h2 class="eyebrow">Tulekul</h2>
+        {{- if $upcoming }}
+        <ul class="events events-compact">{{ range first 3 $upcoming }}{{ partial "event-row.html" . }}{{ end }}</ul>
+        {{- else }}
+        <p class="muted">Uued esinemised lisame peagi. Vaata ka <a href="/esinemised/">varasemaid esinemisi</a>.</p>
+        {{- end }}
+      </div>
+      {{- with $h.kutse_link }}<a class="button" href="{{ . }}">{{ $h.kutse_pealkiri | default "Tule tantsima!" }}</a>{{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="intro wrap">
+  <div class="intro-text prose">
+    {{ $h.sissejuhatus | markdownify }}
+    <p><a class="more" href="/lehed/meist/">Loe meist lähemalt →</a></p>
+  </div>
+  {{- with $h.pilt }}
+  <figure class="intro-figure">
+    <img src="{{ . }}" alt="{{ $h.pildi_allkiri | default "Kakerdaja" }}" loading="lazy">
+    {{- with $h.pildi_allkiri }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+  {{- end }}
+</section>
+
+{{- $news := where site.RegularPages "Section" "uudised" }}
+{{- with first (int ($h.naita_uudiseid | default 3)) $news.ByDate.Reverse }}
+<section class="news wrap">
+  <div class="section-head"><h2>Uudised ja kroonika</h2><a href="/uudised/">Kõik postitused →</a></div>
+  <div class="cards">
+    {{- range . }}{{ partial "news-card.html" . }}{{ end }}
+  </div>
+</section>
+{{- end }}
+
+<section class="invite">
+  <div class="wrap invite-inner">
+    <div>
+      <h2>{{ $h.kutse_pealkiri | default "Tule tantsima!" }}</h2>
+      {{- with $h.kutse_tekst }}<p>{{ . }}</p>{{ end }}
+      {{- with $s.proovid }}<p class="invite-meta"><strong>Proovid:</strong> {{ . }}</p>{{ end }}
+    </div>
+    <a class="button button-light" href="{{ $h.kutse_link | default "/lehed/kontakt/" }}">Võta ühendust</a>
+  </div>
+</section>
+{{ end }}

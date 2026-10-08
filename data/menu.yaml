@@ -1,0 +1,8 @@
+# Päise menüü. Muudetav adminis: "Menüü". Väiksem järjekord = eespool.
+items:
+  - { name: "Meist", url: "/lehed/meist/", weight: 1 }
+  - { name: "Esinemised", url: "/esinemised/", weight: 2 }
+  - { name: "Uudised", url: "/uudised/", weight: 3 }
+  - { name: "Galerii", url: "/lehed/galerii/", weight: 4 }
+  - { name: "Tule tantsima", url: "/lehed/tule-tantsima/", weight: 5 }
+  - { name: "Kontakt", url: "/lehed/kontakt/", weight: 6 }

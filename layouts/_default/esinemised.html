@@ -1,0 +1,20 @@
+{{ define "main" }}
+{{- $today := now.Format "2006-01-02" }}
+{{- $events := (hugo.Data.esinemised | default dict).items | default slice }}
+{{- $up := slice }}{{ $past := slice }}
+{{- range sort $events "kuupaev" "asc" }}{{ if ge ((time.AsTime .kuupaev).Format "2006-01-02") $today }}{{ $up = $up | append . }}{{ end }}{{ end }}
+{{- range sort $events "kuupaev" "desc" }}{{ if lt ((time.AsTime .kuupaev).Format "2006-01-02") $today }}{{ $past = $past | append . }}{{ end }}{{ end }}
+<section class="page wrap-narrow">
+  <header class="page-header"><h1>{{ .Title }}</h1></header>
+  <h2>Tulekul</h2>
+  {{- if $up }}<ul class="events">{{ range $up }}{{ partial "event-row.html" . }}{{ end }}</ul>
+  {{- else }}<p class="muted">Uued esinemised lisame peagi.</p>{{ end }}
+  <h2>Toimunud</h2>
+  {{- $years := slice }}{{ range $past }}{{ $years = $years | append ((time.AsTime .kuupaev).Year) }}{{ end }}
+  {{- range ($years | uniq) }}
+  {{- $y := . }}
+  <h3 class="year">{{ $y }}</h3>
+  <ul class="events">{{ range $past }}{{ if eq ((time.AsTime .kuupaev).Year) $y }}{{ partial "event-row.html" . }}{{ end }}{{ end }}</ul>
+  {{- end }}
+</section>
+{{ end }}

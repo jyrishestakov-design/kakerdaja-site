@@ -1,0 +1,214 @@
+# Kakerdaja sisuhaldus (Sveltia CMS) — sama ülesehitus nagu Sandra lehel.
+# Sisselogimine: GitHubi kontoga, millel on ligipääs repole
+# jyrishestakov-design/kakerdaja-site. Arvutis võib valida ka
+# "Work with Local Repository" ja valida saidi kausta.
+backend:
+  name: github
+  repo: jyrishestakov-design/kakerdaja-site
+  branch: main
+
+media_folder: "static/images/uudised"
+public_folder: "/images/uudised"
+
+# Suured telefonipildid vähendatakse ja pakitakse juba brauseris.
+media_libraries:
+  default:
+    config:
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 2000
+
+site_url: https://kakerdaja.netlify.app
+
+collections:
+  # ------- UUDISED -------
+  - name: uudised
+    label: "Uudised"
+    label_singular: "Postitus"
+    description: "Uudised ja esinemiste meenutused. Vanad blogipostitused (2008–2012) on märgitud kui kroonika."
+    folder: "content/uudised"
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "/uudised/{{filename}}/"
+    summary: "{{date | date('YYYY-MM-DD')}} · {{title}}"
+    sortable_fields: [date, title]
+    fields:
+      - { label: "Pealkiri", name: title, widget: string }
+      - { label: "Kuupäev", name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+      - label: "Liik"
+        name: kategooria
+        widget: select
+        default: uudis
+        options:
+          - { label: "Uudis", value: uudis }
+          - { label: "Kroonika (arhiiv)", value: kroonika }
+      - { label: "Mustand (peidetud)", name: draft, widget: boolean, default: false }
+      - { label: "Kaanepilt", name: cover, widget: image, required: false }
+      - { label: "Sisu", name: body, widget: markdown, hint: "Pildi lisamiseks teksti sisse kasuta tööriistariba pildinuppu." }
+      - label: "Galerii (pildid ja videod)"
+        name: gallery
+        widget: list
+        required: false
+        types:
+          - label: "Pilt"
+            name: image
+            summary: "{{fields.image}} {{fields.caption}}"
+            fields:
+              - { label: "Pilt", name: image, widget: image }
+              - { label: "Pildiallkiri", name: caption, widget: string, required: false }
+              - { label: "Alt-tekst", name: alt, widget: string, required: false }
+          - label: "YouTube video"
+            name: video
+            summary: "{{fields.url}} {{fields.caption}}"
+            fields:
+              - { label: "YouTube link", name: url, widget: string }
+              - { label: "Allkiri", name: caption, widget: string, required: false }
+      - { label: "Algne postitus (link)", name: allikas, widget: string, required: false, hint: "Vanade blogipostituste puhul link algsele postitusele" }
+
+  # ------- ESINEMISED -------
+  - name: esinemised
+    label: "Esinemised"
+    description: "Kõik esinemised. Tulevased (kuupäev tänasest edasi) ilmuvad avalehel „Tulekul“ alla, möödunud lehel Esinemised aastate kaupa."
+    files:
+      - name: esinemised
+        label: "Esinemiste nimekiri"
+        file: "data/esinemised.yaml"
+        preview_path: "/esinemised/"
+        fields:
+          - label: "Esinemised"
+            name: items
+            widget: list
+            summary: "{{fields.kuupaev | date('YYYY-MM-DD')}} · {{fields.nimi}}"
+            add_to_top: true
+            fields:
+              - { label: "Kuupäev", name: kuupaev, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+              - { label: "Kuupäev tekstina (valikuline)", name: kuupaev_tekstina, widget: string, required: false, hint: "Kui täpne päev pole teada, nt „märts 2025“. Muidu jäta tühjaks." }
+              - { label: "Kellaaeg", name: kellaaeg, widget: string, required: false, hint: "nt 19.00" }
+              - { label: "Üritus", name: nimi, widget: string }
+              - { label: "Koht", name: koht, widget: string, required: false }
+              - { label: "Link (valikuline)", name: link, widget: string, required: false, hint: "Ürituse leht, plakat või uudis" }
+
+  # ------- LEHED -------
+  - name: lehed
+    label: "Lehed (Meist, Galerii, Tule tantsima, Kontakt)"
+    label_singular: "Leht"
+    folder: "content/lehed"
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    preview_path: "/lehed/{{slug}}/"
+    sortable_fields: [weight, title]
+    fields:
+      - { label: "Pealkiri", name: title, widget: string }
+      - { label: "Järjekord", name: weight, widget: number, value_type: int, required: false, hint: "Päise menüü järjekorda muudetakse jaotises „Menüü“." }
+      - { label: "Mustand (peidetud)", name: draft, widget: boolean, default: false }
+      - { label: "Paigutus", name: layout, widget: hidden, required: false }
+      - { label: "Sisu", name: body, widget: markdown }
+      - label: "Galerii (pildid ja videod, sisu all)"
+        name: gallery
+        widget: list
+        required: false
+        hint: "Lisa pilte ja YouTube videosid. Järjekorda saab lohistades muuta."
+        types:
+          - label: "Pilt"
+            name: image
+            summary: "{{fields.image}} {{fields.caption}}"
+            fields:
+              - { label: "Pilt", name: image, widget: image }
+              - { label: "Pildiallkiri", name: caption, widget: string, required: false }
+              - { label: "Alt-tekst", name: alt, widget: string, required: false }
+          - label: "YouTube video"
+            name: video
+            summary: "{{fields.url}} {{fields.caption}}"
+            fields:
+              - { label: "YouTube link", name: url, widget: string }
+              - { label: "Allkiri", name: caption, widget: string, required: false }
+
+  # ------- AVALEHT -------
+  - name: avaleht
+    label: "Avaleht"
+    files:
+      - name: home
+        label: "Avalehe tekstid ja pilt"
+        file: "data/home.yaml"
+        preview_path: "/"
+        fields:
+          - { label: "Sissejuhatus", name: sissejuhatus, widget: markdown }
+          - { label: "Pilt", name: pilt, widget: image, required: false }
+          - { label: "Pildi allkiri", name: pildi_allkiri, widget: string, required: false }
+          - { label: "Kutse pealkiri", name: kutse_pealkiri, widget: string }
+          - { label: "Kutse tekst", name: kutse_tekst, widget: text, required: false }
+          - { label: "Kutse nupu link", name: kutse_link, widget: string, required: false }
+          - { label: "Mitu uudist avalehel", name: naita_uudiseid, widget: number, value_type: int, min: 0, max: 9 }
+
+  # ------- SAIDI SEADED -------
+  - name: seaded
+    label: "Saidi seaded ja kontaktid"
+    files:
+      - name: settings
+        label: "Üldised seaded"
+        file: "data/settings.yaml"
+        preview_path: "/lehed/kontakt/"
+        fields:
+          - { label: "Saidi nimi", name: site_title, widget: string }
+          - { label: "Tagline (avalehel logo all)", name: tagline, widget: string, required: false }
+          - { label: "Kirjeldus (Google / jagamine)", name: description, widget: text, required: false }
+          - { label: "Jaluse tekst", name: footer_text, widget: string, hint: "{year} asendatakse jooksva aastaga" }
+          - { label: "Jagamispilt (og:image)", name: og_image, widget: image, required: false }
+          - { label: "Juhendaja", name: juhendaja, widget: string, required: false }
+          - { label: "E-post", name: email, widget: string, required: false }
+          - { label: "Telefon", name: telefon, widget: string, required: false }
+          - { label: "Proovid (aeg)", name: proovid, widget: string, required: false, hint: "nt Pühapäeviti kell 18.00" }
+          - { label: "Proovikoht", name: proovikoht, widget: string, required: false }
+          - { label: "Facebooki link", name: facebook, widget: string, required: false }
+          - { label: "Instagrami link", name: instagram, widget: string, required: false }
+          - { label: "Keel", name: lang, widget: hidden, default: et }
+
+  # ------- MENÜÜ -------
+  - name: menyy
+    label: "Menüü"
+    files:
+      - name: menu
+        label: "Menüü kirjed"
+        file: "data/menu.yaml"
+        preview_path: "/"
+        fields:
+          - label: "Kirjed"
+            name: items
+            widget: list
+            summary: "{{fields.name}} → {{fields.url}}"
+            fields:
+              - { label: "Nimi", name: name, widget: string }
+              - { label: "Aadress", name: url, widget: string, hint: "nt /lehed/meist/ või https://..." }
+              - { label: "Järjekord", name: weight, widget: number, value_type: int }
+
+  # ------- KUJUNDUS -------
+  - name: kujundus
+    label: "Kujundus"
+    description: "Värvid ja fondid. Logo värvub automaatselt „Tindi“ värviga."
+    files:
+      - name: design
+        label: "Värvid ja fondid"
+        file: "data/design.yaml"
+        preview_path: "/"
+        fields:
+          - { label: "Paberi (tausta) värv", name: paber, widget: color }
+          - { label: "Tindi (teksti ja logo) värv", name: tint, widget: color }
+          - { label: "Aktsentvärv (lingid, nupud)", name: aktsent, widget: color }
+          - { label: "Teine aktsentvärv (sildid, pildi vari)", name: aktsent2, widget: color }
+          - { label: "Tume taust (kutse riba)", name: tume_taust, widget: color }
+          - { label: "Joonte värv", name: joon, widget: color }
+          - { label: "Näita vikerkaaretriipu", name: triip_naita, widget: boolean, default: true }
+          - { label: "Triibu värvid", name: triibu_varvid, widget: string, hint: "Komadega eraldatud HEX-koodid, vasakult paremale" }
+          - { label: "Pealkirjade font", name: font_pealkiri, widget: string }
+          - { label: "Teksti font", name: font_tekst, widget: string }
+          - { label: "Google Fonts URL", name: google_fonts_url, widget: string, required: false }
+          - { label: "Baasfondi suurus", name: baasfont, widget: string }
+          - { label: "Reakõrgus", name: reakorgus, widget: string }
+          - { label: "Teksti veeru laius", name: sisu_laius, widget: string }

@@ -1,0 +1,25 @@
+{{- with .Params.gallery }}
+<div class="gallery">
+  {{- range . }}
+  {{- if eq (.type | default "image") "video" }}
+  {{- $yt := partial "youtube-item.html" . }}
+  {{- if $yt.id }}
+  <figure class="gallery-video">
+    <a href="https://www.youtube.com/watch?v={{ $yt.id }}" target="_blank" rel="noopener" aria-label="Vaata YouTube'is">
+      <img src="{{ $yt.thumb }}" alt="{{ $yt.caption | default "Video" }}" loading="lazy"><span class="play-icon" aria-hidden="true"></span>
+    </a>
+    {{- with $yt.caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+  {{- end }}
+  {{- else }}
+  {{- $img := partial "image-item.html" . }}
+  {{- if $img.url }}
+  <figure>
+    <img src="{{ $img.url }}" alt="{{ $img.alt | default $img.caption | default "Kakerdaja" }}" loading="lazy">
+    {{- with $img.caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+  {{- end }}
+  {{- end }}
+  {{- end }}
+</div>
+{{- end }}

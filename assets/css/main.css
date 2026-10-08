@@ -1,0 +1,163 @@
+/* Kakerdaja — põhistiil. Värvid ja fondid tulevad data/design.yaml-ist (admin: Kujundus). */
+:root{
+  --paper:#F6F1E6; --ink:#151412; --accent:#D7263D; --accent-2:#F6C324; --dark:#2B2E5C; --rule:#DDD3BF;
+  --font-head:'Alegreya',Georgia,serif; --font-body:'Alegreya Sans','Helvetica Neue',sans-serif;
+  --base:18px; --lh:1.65; --measure:720px;
+  --stripe:linear-gradient(90deg,#D7263D 0 14.28%,#F46036 0 28.57%,#F6C324 0 42.85%,#2E933C 0 57.14%,#1B6FC2 0 71.42%,#3A3D9C 0 85.71%,#7B2D8E 0);
+  --muted:color-mix(in srgb,var(--ink) 62%,var(--paper));
+  --wrap:1160px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:var(--base);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);line-height:var(--lh);text-rendering:optimizeLegibility}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.18em}
+a:hover{color:var(--accent)}
+h1,h2,h3{font-family:var(--font-head);line-height:1.15;font-weight:800;letter-spacing:-.005em;margin:0 0 .5em}
+h1{font-size:clamp(2rem,5vw,3rem)} h2{font-size:clamp(1.45rem,3vw,1.9rem)} h3{font-size:1.2rem}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.wrap-narrow{max-width:calc(var(--measure) + 48px);margin:0 auto;padding:0 24px}
+.visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper);padding:8px 12px;z-index:10}
+.skip:focus{left:8px}
+.muted{color:var(--muted)}
+.eyebrow{font-family:var(--font-body);font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;font-weight:700;color:var(--muted);margin:0 0 .6em}
+.eyebrow a{text-decoration:none}
+
+/* Logo maskidena: värv = --ink, nii et admini kujunduse muutus kehtib ka logole */
+.brand-bird,.hero-bird,.footer-bird{display:block;background:var(--ink);-webkit-mask:url(/images/logo/Kakerdaja_lind_must.svg) center/contain no-repeat;mask:url(/images/logo/Kakerdaja_lind_must.svg) center/contain no-repeat;aspect-ratio:3252/4480}
+.brand-word,.hero-word{display:block;background:var(--ink);-webkit-mask:url(/images/logo/Kakerdaja_tekst_must.svg) center/contain no-repeat;mask:url(/images/logo/Kakerdaja_tekst_must.svg) center/contain no-repeat;aspect-ratio:4122/736}
+
+/* Triip — rahvarõiva seelikutriibu motiiv vikerkaarevärvides */
+.stripe{height:7px;background:var(--stripe)}
+
+/* Päis */
+.site-header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(6px)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:76px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-bird{height:52px}
+.brand-word{width:150px}
+.site-nav{display:flex;gap:4px 22px;flex-wrap:wrap}
+.site-nav a{text-decoration:none;font-weight:500;padding:6px 0;border-bottom:2px solid transparent}
+.site-nav a:hover{color:var(--ink);border-color:var(--rule)}
+.site-nav a.active{border-color:var(--accent)}
+.nav-toggle{display:none;font:inherit;font-weight:700;background:none;border:1.5px solid var(--ink);border-radius:999px;padding:6px 16px;color:var(--ink);cursor:pointer}
+@media (max-width:860px){
+  .nav-toggle{display:block}
+  .site-nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;background:var(--paper);padding:12px 24px 20px;border-bottom:1px solid var(--rule)}
+  .site-nav.open{display:flex}
+  .site-nav a{font-size:1.15rem;padding:10px 0;border:0;border-bottom:1px solid var(--rule)}
+  .site-nav a.active{color:var(--accent)}
+  .brand-word{width:120px}.brand-bird{height:44px}
+}
+
+/* Avalehe esiosa */
+.hero{padding:56px 0 40px}
+.hero-inner{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:56px;align-items:center}
+.hero-art{display:flex;justify-content:center}
+.hero-bird{width:min(100%,420px)}
+.hero-title{margin:0 0 .4em}
+.hero-word{width:min(100%,520px)}
+.hero-tagline{font-family:var(--font-head);font-style:italic;font-size:clamp(1.15rem,2.2vw,1.45rem);margin:0 0 28px;max-width:30ch}
+.next-up{border-top:2px solid var(--ink);padding-top:14px;margin-bottom:28px;max-width:520px}
+@media (max-width:860px){
+  .hero{padding:28px 0 24px}
+  .hero-inner{grid-template-columns:1fr;gap:20px;text-align:left}
+  .hero-bird{width:min(62vw,280px)}
+}
+
+/* Nupud */
+.button{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:700;padding:13px 26px;border-radius:999px;border:2px solid var(--ink);transition:transform .15s ease}
+.button:hover{color:var(--paper);background:var(--accent);border-color:var(--accent);transform:translateY(-1px)}
+.button-light{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.button-light:hover{background:var(--accent-2);border-color:var(--accent-2);color:var(--ink)}
+.more{font-weight:700;text-decoration:none;color:var(--accent)}
+.more:hover{text-decoration:underline}
+
+/* Sissejuhatus */
+.intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center;padding-top:48px;padding-bottom:64px;border-top:1px solid var(--rule)}
+.intro-figure{margin:0}
+.intro-figure img{border-radius:4px;box-shadow:12px 12px 0 var(--accent-2)}
+figcaption{font-size:.85rem;color:var(--muted);margin-top:14px}
+@media (max-width:860px){.intro{grid-template-columns:1fr;gap:32px}}
+
+/* Tekst */
+.prose{max-width:var(--measure)}
+.prose p,.prose ul,.prose ol{margin:0 0 1em}
+.prose h2{margin-top:1.6em}
+.prose a{color:var(--accent)}
+.prose blockquote{margin:1.5em 0;padding-left:1em;border-left:3px solid var(--accent-2);font-style:italic}
+
+/* Uudised */
+.news{padding-bottom:72px}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-top:2px solid var(--ink);padding-top:16px;margin-bottom:24px}
+.section-head h2{margin:0}
+.section-head a{font-weight:700;text-decoration:none;color:var(--accent)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.card{background:color-mix(in srgb,var(--paper) 70%,white);border:1px solid var(--rule);border-radius:6px;padding:22px 22px 20px;display:flex;flex-direction:column}
+.card h3{font-size:1.2rem;margin:.35em 0 .45em}
+.card h3 a{text-decoration:none}
+.card h3 a::after{content:"";position:absolute;inset:0}
+.card{position:relative}
+.card:hover{border-color:var(--ink)}
+.card p{margin:0;color:var(--muted);font-size:.95rem}
+.card-date{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tag{display:inline-block;align-self:flex-start;margin:4px 0 0;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:var(--accent-2);color:var(--ink);padding:1px 8px;border-radius:999px;vertical-align:1px}
+.archive-title{margin-top:56px}
+
+/* Kutse */
+.invite{background:var(--dark);color:var(--paper);padding:56px 0}
+.invite-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.invite h2{margin:0 0 .3em;font-size:clamp(1.8rem,4vw,2.6rem)}
+.invite p{margin:0 0 .4em;max-width:52ch}
+.invite-meta{opacity:.85}
+
+/* Lehed */
+.page{padding-top:48px;padding-bottom:80px}
+.page-header{margin-bottom:28px}
+.page-header h1{margin:0}
+.cover{margin:0 0 28px}
+.source{margin-top:32px;font-size:.9rem}
+
+/* Esinemised */
+.events{list-style:none;margin:0 0 28px;padding:0}
+.event{display:grid;grid-template-columns:11rem minmax(0,1fr) auto;gap:4px 20px;padding:11px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.event-date{font-weight:700;font-variant-numeric:tabular-nums}
+.event-place{color:var(--muted);text-align:right}
+.event-time{color:var(--muted)}
+.events-compact .event{grid-template-columns:9.5rem minmax(0,1fr);padding:7px 0}
+.events-compact .event-place{grid-column:2;text-align:left;font-size:.9rem;margin-top:-4px}
+.year{margin:32px 0 6px;font-size:1.05rem;color:var(--accent)}
+@media (max-width:640px){
+  .event{grid-template-columns:1fr;gap:0}
+  .event-place{text-align:left;font-size:.9rem}
+  .events-compact .event{grid-template-columns:1fr}
+  .events-compact .event-place{grid-column:1}
+}
+
+/* Kontakt */
+.contact{display:grid;grid-template-columns:9rem 1fr;gap:10px 20px;margin:0 0 32px;padding:20px 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule)}
+.contact dt{font-weight:700}
+.contact dd{margin:0}
+@media (max-width:540px){.contact{grid-template-columns:1fr}.contact dd{margin-bottom:8px}}
+
+/* Galerii + lightbox */
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:32px}
+.gallery figure{margin:0}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px;cursor:zoom-in}
+.gallery-video a{position:relative;display:block}
+.play-icon{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:rgba(0,0,0,.6)}
+.play-icon::after{content:"";position:absolute;left:26px;top:20px;border-style:solid;border-width:12px 0 12px 19px;border-color:transparent transparent transparent #fff}
+.lightbox{position:fixed;inset:0;background:rgba(15,14,12,.94);display:none;align-items:center;justify-content:center;z-index:100}
+.lightbox.active{display:flex}
+.lightbox img{max-width:92vw;max-height:88vh;object-fit:contain}
+.lightbox button{position:absolute;background:none;border:0;color:#fff;font-size:2rem;cursor:pointer;padding:16px}
+.lightbox .lb-prev{left:8px}.lightbox .lb-next{right:8px}.lightbox .lb-close{top:8px;right:8px;font-size:1.6rem}
+
+/* Jalus */
+.site-footer{margin-top:0}
+.footer-inner{display:flex;align-items:center;gap:20px;padding-top:28px;padding-bottom:40px;font-size:.92rem;color:var(--muted)}
+.footer-inner p{margin:0}
+.footer-bird{height:56px}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px!important}
+.plain-list{padding-left:1.1em}

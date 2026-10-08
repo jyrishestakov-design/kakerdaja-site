@@ -1,0 +1,6 @@
+<article class="card">
+  <time class="card-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "date-et.html" .Date }}</time>
+  {{- with .Params.kategooria }}{{ if eq . "kroonika" }}<span class="tag">Kroonika</span>{{ end }}{{ end }}
+  <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+  <p>{{ .Summary | plainify | truncate 170 }}</p>
+</article>

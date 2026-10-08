@@ -1,0 +1,14 @@
+{{ define "main" }}
+{{- $s := hugo.Data.settings | default dict }}
+<article class="page wrap-narrow">
+  <header class="page-header"><h1>{{ .Title }}</h1></header>
+  <dl class="contact">
+    {{- with $s.juhendaja }}<dt>Juhendaja</dt><dd>{{ . }}</dd>{{ end }}
+    {{- with $s.email }}<dt>E-post</dt><dd><a href="mailto:{{ . }}">{{ . }}</a></dd>{{ end }}
+    {{- with $s.telefon }}<dt>Telefon</dt><dd><a href="tel:{{ replace . " " "" }}">{{ . }}</a></dd>{{ end }}
+    {{- with $s.proovid }}<dt>Proovid</dt><dd>{{ . }}{{ with $s.proovikoht }}, {{ . }}{{ end }}</dd>{{ end }}
+    {{- with $s.facebook }}<dt>Facebook</dt><dd><a href="{{ . }}" target="_blank" rel="noopener">{{ . }}</a></dd>{{ end }}
+  </dl>
+  <div class="prose">{{ .Content }}</div>
+</article>
+{{ end }}
